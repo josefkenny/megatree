@@ -1,0 +1,90 @@
+==9545== Memcheck, a memory error detector
+==9545== Copyright (C) 2002-2015, and GNU GPL'd, by Julian Seward et al.
+==9545== Using Valgrind-3.11.0 and LibVEX; rerun with -h for copyright info
+==9545== Command: ./bin/test_megatree
+==9545== 
+==9545== error calling PR_SET_PTRACER, vgdb might block
+Running megatree tests...
+ Create root node 
+mt_create_root:473 (size_t) sizeof *new_root = 64
+==9545== Invalid write of size 8
+==9545==    at 0x401641: mt_create_root (megatree.c:475)
+==9545==    by 0x40099E: main (test_megatree.c:99)
+==9545==  Address 0x5204040 is 0 bytes after a block of size 0 alloc'd
+==9545==    at 0x4C2FB55: calloc (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==9545==    by 0x40160F: mt_create_root (megatree.c:471)
+==9545==    by 0x40099E: main (test_megatree.c:99)
+==9545== 
+==9545== Invalid write of size 8
+==9545==    at 0x401648: mt_create_root (megatree.c:476)
+==9545==    by 0x40099E: main (test_megatree.c:99)
+==9545==  Address 0x5204048 is 8 bytes after a block of size 0 alloc'd
+==9545==    at 0x4C2FB55: calloc (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==9545==    by 0x40160F: mt_create_root (megatree.c:471)
+==9545==    by 0x40099E: main (test_megatree.c:99)
+==9545== 
+==9545== Conditional jump or move depends on uninitialised value(s)
+==9545==    at 0x401506: mt_set_label (megatree.c:442)
+==9545==    by 0x401654: mt_create_root (megatree.c:477)
+==9545==    by 0x40099E: main (test_megatree.c:99)
+==9545== 
+==9545== Invalid write of size 8
+==9545==    at 0x401667: mt_create_root (megatree.c:478)
+==9545==    by 0x40099E: main (test_megatree.c:99)
+==9545==  Address 0x5204058 is 24 bytes after a block of size 0 in arena "client"
+==9545== 
+==9545== Invalid write of size 8
+==9545==    at 0x40166F: mt_create_root (megatree.c:480)
+==9545==    by 0x40099E: main (test_megatree.c:99)
+==9545==  Address 0x5204070 is 16 bytes before a block of size 5 alloc'd
+==9545==    at 0x4C2DB8F: malloc (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==9545==    by 0x4EC5509: strdup (strdup.c:42)
+==9545==    by 0x401516: mt_set_label (megatree.c:444)
+==9545==    by 0x401654: mt_create_root (megatree.c:477)
+==9545==    by 0x40099E: main (test_megatree.c:99)
+==9545== 
+==9545== Invalid write of size 8
+==9545==    at 0x401677: mt_create_root (megatree.c:481)
+==9545==    by 0x40099E: main (test_megatree.c:99)
+==9545==  Address 0x5204078 is 8 bytes before a block of size 5 alloc'd
+==9545==    at 0x4C2DB8F: malloc (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==9545==    by 0x4EC5509: strdup (strdup.c:42)
+==9545==    by 0x401516: mt_set_label (megatree.c:444)
+==9545==    by 0x401654: mt_create_root (megatree.c:477)
+==9545==    by 0x40099E: main (test_megatree.c:99)
+==9545== 
+ Finished creating root 
+Create first level branches
+ Add sub-branches to last node of first level branches
+ Set the label of an existing branch
+==9545== 
+==9545== Process terminating with default action of signal 11 (SIGSEGV)
+==9545==  Bad permissions for mapped region at address 0x401AC0
+==9545==    at 0x4E89955: vfprintf (vfprintf.c:1632)
+==9545==    by 0x4E89F00: buffered_vfprintf (vfprintf.c:2320)
+==9545==    by 0x4E8733C: vfprintf (vfprintf.c:1293)
+==9545==    by 0x401150: mt_error (megatree.c:89)
+==9545==    by 0x40155B: mt_set_label (megatree.c:438)
+==9545==    by 0x400B33: main (test_megatree.c:122)
+==9545== 
+==9545== HEAP SUMMARY:
+==9545==     in use at exit: 5 bytes in 2 blocks
+==9545==   total heap usage: 2 allocs, 0 frees, 5 bytes allocated
+==9545== 
+==9545== 0 bytes in 1 blocks are definitely lost in loss record 1 of 2
+==9545==    at 0x4C2FB55: calloc (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==9545==    by 0x40160F: mt_create_root (megatree.c:471)
+==9545==    by 0x40099E: main (test_megatree.c:99)
+==9545== 
+==9545== LEAK SUMMARY:
+==9545==    definitely lost: 0 bytes in 1 blocks
+==9545==    indirectly lost: 0 bytes in 0 blocks
+==9545==      possibly lost: 0 bytes in 0 blocks
+==9545==    still reachable: 5 bytes in 1 blocks
+==9545==         suppressed: 0 bytes in 0 blocks
+==9545== Reachable blocks (those to which a pointer was found) are not shown.
+==9545== To see them, rerun with: --leak-check=full --show-leak-kinds=all
+==9545== 
+==9545== For counts of detected and suppressed errors, rerun with: -v
+==9545== Use --track-origins=yes to see where uninitialised values come from
+==9545== ERROR SUMMARY: 7 errors from 7 contexts (suppressed: 0 from 0)
